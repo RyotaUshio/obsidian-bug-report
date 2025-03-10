@@ -9,17 +9,22 @@
 5. Click the PDF view. Now, the active leaf is the PDF leaf.
 6. Run the "Test" command from the command palette. This command uses `checkCallback`, and it will show up in the command palette only when the PDF view is active, and in such a case, running the command should show a notification saying "Active PDF view found".
 
+This is what it looks like when the command runs successfully: 
+
+https://github.com/user-attachments/assets/992edf2b-0c53-47cb-bb10-2dc8ab7c7b4a
+
 ### Did you follow the troubleshooting guide? [Y/N]
 
 Yes. This bug can be reproduced in the sandbox vault with only this example plugin being enabled. However, it might not always happen consistently.
 
 ### Expected result
 
-Because the PDF leaf became active before opening the command palette, the command should run successfully and show the notification.
+Because the PDF leaf became active before opening the command palette, the PDF leaf should be kept active. As a result, the command should run successfully and show the notification.
 
 ### Actual result
 
-The notification is not shown despite the command being displayed in the command palette.
+The focus is moved to the markdown view, and the PDF view is not active any more.
+As a result, the command fails to run and the notification is not shown despite the command being displayed in the command palette.
 
 ### Environment
 
@@ -50,4 +55,7 @@ RECOMMENDATIONS:
 ### Additional information
 
 - The forth step seems redundant, however if you skip it, the bug cannot be reproduced.
-- Screen recording: 
+- Screen recording of the bug:
+
+https://github.com/user-attachments/assets/0f82f7cd-2637-44cb-8133-7823fd50756d
+

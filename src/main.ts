@@ -1,22 +1,31 @@
-import { Plugin } from 'obsidian';
-
-import { MyPluginSettings, DEFAULT_SETTINGS, SampleSettingTab } from './settings';
+import { EditableFileView, Notice, Plugin } from 'obsidian';
 
 
 export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
-
 	async onload() {
-		await this.loadSettings();
-		await this.saveSettings();
-		this.addSettingTab(new SampleSettingTab(this));
+		// A command that can be executed only when a PDF view is active
+		this.addCommand({
+			id: 'test',
+			name: 'Test',
+			checkCallback: (checking) => {
+				const pdfView = this.getActivePdfView();
+				if (!pdfView) return false;
+
+				if (!checking) {
+					new Notice('Active PDF view found');
+				}
+
+				return true;
+			}
+		});
 	}
 
-	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	}
-
-	async saveSettings() {
-		await this.saveData(this.settings);
+	getActivePdfView() {
+		// avoid using activeLeaf directly
+		const view = this.app.workspace.getActiveViewOfType(EditableFileView);
+		if (view && view.getViewType() === 'pdf') {
+			return view;
+		}
+		return null;
 	}
 }

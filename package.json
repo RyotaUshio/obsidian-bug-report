@@ -1,7 +1,6 @@
 {
-	"name": "obsidian-",
-	"version": "0.1.0",
-	"description": "An Obsidian.md plugin to ",
+	"name": "obsidian-bug-report",
+	"version": "1.0.0",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
